@@ -1,0 +1,28 @@
+<apex:page standardController="Account">
+
+<apex:tabPanel switchType="client">
+
+<apex:tab label="Details"  >
+
+<apex:detail relatedList="false" inlineEdit="true"/>
+</apex:tab>
+
+<!--
+<apex:tab label="Contacts">
+<apex:relatedList subject="{!Account}" list="contacts"/>
+</apex:tab>
+<apex:tab label="opportunities">
+<apex:relatedList subject="{!Account}" list="opportunities"/>
+</apex:tab>
+<apex:tab label="Cases">
+<apex:relatedList subject="{!Account}" list="Cases"/>
+</apex:tab>
+<apex:tab label="At Risk Events">
+<apex:relatedList subject="{!Account}" list="At_Risk_Events__R"/>
+
+</apex:tab>
+-->
+
+
+</apex:tabPanel>
+</apex:page>

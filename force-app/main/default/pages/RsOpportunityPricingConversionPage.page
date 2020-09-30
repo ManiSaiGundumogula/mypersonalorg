@@ -1,0 +1,16 @@
+<apex:page standardController="Opportunity">
+    <apex:includeLightning />
+    <div id="LcDisplayId"></div> 
+    <script>
+    var a="{!Opportunity.Id}";
+    $Lightning.use("c:RSOpportunityPricingConversion", function() {
+    $Lightning.createComponent("c:RsOpportunityPricingConversionComponent",
+    {
+        "recordId": a
+    },
+   "LcDisplayId",
+    function(component) {
+    });
+ });
+    </script>
+</apex:page>

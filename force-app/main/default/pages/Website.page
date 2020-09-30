@@ -1,0 +1,104 @@
+<apex:page standardcontroller="Custom_Users__c" extensions="WebsiteController" sidebar="false" showHeader="false" >
+    
+    
+    <apex:form >
+        <br/><br/><br/>
+        Welcome {!LoggedInUser.Name}, <br/><br/><br/>
+        <apex:pageBlock > 
+            &nbsp; &nbsp;&nbsp;&nbsp;
+            <apex:commandLink value="Search IMEI"  action="{!search}" reRender="pageblock" /> &nbsp; &nbsp;&nbsp;&nbsp;
+            <apex:commandLink value="Add Lost Mobile"  action="{!addLostMobiles}" reRender="pageblock" />&nbsp; &nbsp;&nbsp;&nbsp;
+            <apex:commandLink value="Mobiles Added"   action="{!getmobilesAdded}" reRender="pageblock" />&nbsp; &nbsp;&nbsp;&nbsp;
+            <apex:commandLink value="Update Profile"  action="{!getProfile}" reRender="pageblock" />&nbsp; &nbsp;&nbsp;&nbsp;
+        </apex:pageBlock>  
+        <apex:pageBlock id="pageblock" >
+          
+            <apex:pageBlockSection rendered="{!sec1}" > 
+                <apex:inputText value="{!IMEINo}" label="Enter IMEI No"  /> <br/>
+                <apex:commandButton action="{!SearchIMEI}" value="Search"  />
+            </apex:pageBlockSection>
+             
+            <apex:pageBlockSection rendered="true">
+                <apex:pageMessages /><br/>
+                <table >
+                    <tr>
+
+                        <th >IMEI No</th>
+                        <th>Mobile Brand</th>
+                        <th>Mobile Model No</th>
+                        <th>Lost Place</th>
+                        <th>Status</th>
+                    </tr>
+                    <tr>
+                        <td>{!searchLostPhone.IMEI_No__c}</td>
+                        <td>{!searchLostPhone.Mobile_Brand__c}</td>
+                            <td>{!searchLostPhone.Mobile_Model__c}</td>
+                            <td>{!searchLostPhone.Lost_Place__c}</td>
+                            <td>{!searchLostPhone.Status__c}</td>
+                    </tr>
+                </table>
+            </apex:pageBlockSection>
+            
+            <apex:pageBlockSection rendered="{!sec2}"> 
+                <apex:pageMessages /><br/>
+                <apex:inputField value="{!addLostPhone.IMEI_No__c}"/>
+                <apex:inputField value="{!addLostPhone.Mobile_Brand__c}"/>
+                <apex:inputField value="{!addLostPhone.Mobile_Model__c}"/>
+                <apex:inputField value="{!addLostPhone.Lost_Phone_Mobile_No__c}"/>
+                <apex:inputField value="{!addLostPhone.Lost_Place__c}"/>
+                <apex:inputField value="{!addLostPhone.Pincode__c}"/>
+                <apex:inputField value="{!addLostPhone.Contact_No__c}"/>
+                <apex:inputField value="{!addLostPhone.Status__c}"/>
+                
+                <apex:commandButton value="Add Lost Mobile Details" action="{!addLostDetails}" />  
+            </apex:pageBlockSection> 
+            
+            
+            
+            
+            <apex:pageBlockSection rendered="{!sec3}"  > 
+                
+                <table border="0" width="80%">
+                    <tr>
+                        <th >IMEI No</th>
+                        <th>Mobile Brand</th>
+                        <th>Mobile Model No</th>
+                        <th>Lost Place</th>
+                        <th>Status</th>
+                    </tr> 
+                    <apex:repeat value="{!getLostMobileDetails}" var="lost" >  
+                        <tr>
+                            <td>{!lost.IMEI_No__c}</td>
+                            <td>{!lost.Mobile_Brand__c}</td>
+                            <td>{!lost.Mobile_Model__c}</td>
+                            <td>{!lost.Lost_Place__c}</td>
+                            <td>{!lost.Status__c}</td>
+                        </tr>
+                    </apex:repeat>
+                </table>
+            </apex:pageBlockSection> 
+            
+            
+            
+            
+            <apex:pageBlockSection rendered="{!sec4}"> 
+                <apex:pageMessages /><br/>
+                <apex:inputField value="{!LoggedInUser.Name}"/>
+                <apex:inputField value="{!LoggedInUser.Date_of_Birth__c}"/>
+                <apex:inputField value="{!LoggedInUser.Gender__c}"/>
+                <apex:inputField value="{!LoggedInUser.Country__c}"/>
+                <apex:inputField value="{!LoggedInUser.Pin_Code__c}"/>
+                <apex:inputField value="{!LoggedInUser.Mobile_No__c}"/>
+                
+                <apex:commandButton value="Update Profile" action="{!updateProfileDetails}" /> 
+                
+            </apex:pageBlockSection> 
+            
+            
+            
+            
+        </apex:pageBlock>
+        
+        
+    </apex:form>   
+</apex:page>

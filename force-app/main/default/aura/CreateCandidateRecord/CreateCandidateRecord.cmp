@@ -1,0 +1,24 @@
+<aura:component controller="CreateCandidateRecord" 
+				implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes" 
+				access="global" >
+    
+    <!-- Include Static Resource-->
+    <ltng:require styles="/resource/bootstrap/css/bootstrap.min.css" 
+				  scripts="/resource/bootstrap/js/jquery.js,/resource/bootstrap/js/bootstrap.min.js"/>
+    
+    <!-- Define Attribute-->
+    <aura:attribute name="candidate" type="Account" default="{'sobjectType': 'Account',
+                         'Name': ''
+                       }"/>
+    <div class="container-fluid">
+        <h3>Please Enter The Candidate Information</h3>
+        <div class="form-group">
+            <label>First Name</label>
+            <ui:inputText class="form-control" value="{!v.candidate.Name}"/>
+        </div>
+        
+    </div>
+    <div class="col-md-4 text-center">
+        <ui:button class="btn btn-default" press="{!c.create}">Create</ui:button>
+  </div>
+</aura:component>

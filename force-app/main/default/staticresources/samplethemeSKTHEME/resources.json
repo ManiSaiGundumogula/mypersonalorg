@@ -1,0 +1,28 @@
+{
+	"fontConfig": {
+		"custom": {
+			"families": [
+				"Open Sans"
+			],
+			"urls": []
+		}
+	},
+	"cssResources": [
+		{
+			"type": "static",
+			"name": "Fonts",
+			"namespace": "skuid",
+			"path": "opensans/opensans.css"
+		}
+	],
+	"themeSettings": {
+		"visualizations": {
+			"chart": {},
+			"geochart": {
+				"background": "#9bc6cf",
+				"nullColor": "#eee"
+			}
+		}
+	},
+	"__comment": "DO NOT EDIT, this is a generated file and all changes will be overwritten. If you wish to change the resources loaded, please do so in the skuid_theme.json"
+}

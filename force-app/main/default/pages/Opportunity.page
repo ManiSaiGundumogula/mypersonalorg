@@ -1,0 +1,9 @@
+<apex:page Extensions="sampleCon" standardController="Opportunity">
+    <apex:form >
+        <apex:selectList size="1" >
+            <apex:selectOptions value="{!items}"/>
+        </apex:selectList><br/>
+        <apex:commandButton value="Submit" action="{!test}" />
+    </apex:form>
+    
+</apex:page>

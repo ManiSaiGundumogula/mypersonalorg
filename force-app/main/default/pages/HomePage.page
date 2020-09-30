@@ -1,0 +1,33 @@
+<apex:page standardcontroller="Custom_Users__c" extensions="HomePageController" sidebar="false" showHeader="false">
+     <script type="text/javascript">
+     </script> 
+    <apex:form >
+        <apex:pageBlock > 
+            <apex:pageBlockSection title="Login Here" columns="1" >            
+                <apex:pageMessages rendered="{!LoginFlag}" />
+                Email Id <apex:inputtext value="{!uemail}" /> 
+                Password <apex:inputSecret value="{!upassword}" /> 
+                <apex:commandButton action="{!Search}"  value="Login" />
+            </apex:pageBlockSection>
+        </apex:pageBlock> 
+        
+        
+        <apex:pageBlock id="register-rerender">
+            <apex:pageBlockButtons location="bottom">                   
+                <apex:commandButton value="Register" action="{!save}" reRender="register-rerender"/>
+            </apex:pageBlockButtons>  
+            <apex:pageBlockSection title="Dont have an Account Still!!!! Register here " columns="1">
+                <apex:pageMessages rendered="{!RegisterFlag}"/>
+                <apex:inputField value="{!newUser.Name}" />
+                <apex:inputField value="{!newUser.Email_ID__c}" />
+                <apex:inputField value="{!newUser.Gender__c}" />
+                <apex:inputField value="{!newUser.Date_of_Birth__c}" />
+                <apex:inputField value="{!newUser.Mobile_No__c}" />
+                <apex:inputField value="{!newUser.Country__c}" />
+                <apex:inputField value="{!newUser.Pin_Code__c}" />
+            </apex:pageBlockSection>  
+        </apex:pageBlock>
+        
+        
+    </apex:form>
+</apex:page>

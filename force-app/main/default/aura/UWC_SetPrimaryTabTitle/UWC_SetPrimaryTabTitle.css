@@ -1,0 +1,15 @@
+.THIS {
+}
+.THIS .lightning-primitive-icon {
+    display: none;
+}
+.THIS .swal-modal{
+    height:500px !important;
+    width:850px !important;
+}
+.THIS .slds-theme--warning, .THIS.slds-notify--toast, .THIS.slds-notify, .THIS.slds-notify--toast, .THIS.forceToastMessage{
+    display:none;
+}
+.THIS .mymodal {
+    padding-top:250px;
+}

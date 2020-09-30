@@ -1,0 +1,6 @@
+<apex:page standardController="Account" action="{!dotestpage}"  extensions="testpage" tabStyle="Account">
+  
+    <apex:pageMessage severity="Error" summary="You don't have create permissions on Account Object" strength="1"/>
+    
+  
+</apex:page>

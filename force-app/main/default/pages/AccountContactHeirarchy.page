@@ -1,0 +1,28 @@
+<apex:page controller="GroupingExampleController" >
+ <apex:form >
+  <apex:pageBlock >
+  Group By: <apex:selectList value="{!groupFieldName}" size="1">
+     <apex:selectOptions value="{!groupOptions}" />
+  </apex:selectList>&nbsp; <apex:commandButton value="Go" action="{!regroup}"/>
+  <table border="0">
+   <apex:repeat value="{!Groups}" var="group">
+      
+      <apex:repeat value="{!group.accs}" var="acc">
+      <tr>
+          <td width="30px"></td>
+        <td colspan="2"><b>Account:</b>{!acc.Name}</td>
+       </tr>
+       
+         <apex:repeat value="{!acc.Contacts}" var="cont">
+            <tr>
+               <td width="30px"></td>
+               <td width="30px"></td>
+              <td><b>Contact:</b>{!cont.Name} {!cont.phone}</td>
+           </tr> 
+         </apex:repeat>
+      </apex:repeat>
+   </apex:repeat>
+  </table>
+  </apex:pageBlock>
+ </apex:form>
+</apex:page>

@@ -1,0 +1,97 @@
+<apex:page standardController="Account" docType="html-5.0" extensions="SearchController" id="page">
+        <style>
+  .apexp .bPageBlock .detailList .list {
+    width: 100%;
+    position: relative !important;
+    right: 270px !important;
+            
+}  
+      </style>
+    <script type="text/javascript">
+        function selectAllCheckboxes(obj,receivedInputID){
+            var inputCheckBox = document.getElementsByTagName("input");  
+            for(var i=0; i<inputCheckBox.length; i++){          
+                if(inputCheckBox[i].id.indexOf(receivedInputID)!=-1){                                     
+                    inputCheckBox[i].checked = obj.checked;
+                }
+            }
+        }
+        function uncheck(obj){
+            
+           if(!obj.checked)
+            {
+               alert(obj.checked); 
+               var input= document.getElementById("checkall");
+                alert(obj); 
+                alert(input);
+                input.checked=false;
+            }
+         }
+    </script>
+    <apex:form id="searchForm">
+        <apex:PageBlock id="pb">   
+            
+            <apex:pageblockSection id="searchBlockSection">
+               <apex:pageBlockSectionItem id="searchBlockSectionItem"> 
+                    <apex:outputLabel >Account Name</apex:outputLabel>
+                    <apex:inputtext id="searchTextBox" value="{!searchText1}"  >
+                   <apex:actionSupport event="onkeyup" action="{!search}" /> 
+                </apex:inputtext> 
+               </apex:pageBlockSectionItem>  
+                <apex:pageblockSectionItem >
+                    <apex:outputLabel >Created Date</apex:outputLabel>
+                    <apex:input type="date" value="{!dat}">
+                     <apex:actionSupport event="onchange" action="{!search}"/> 
+                </apex:input> 
+                </apex:pageblockSectionItem>
+               
+                <apex:pageBlockSectionItem >
+                    <apex:commandButton Id="btnSearch" action="{!search}" rerender="renderBlock1" status="status" title="Search" value="Search" />                    
+                </apex:pageBlockSectionItem> 
+          
+            </apex:pageblockSection>
+            
+            <apex:actionStatus id="status" startText="Searching... please wait..." />    
+        </apex:PageBlock>
+    </apex:form>     
+    <apex:pageBlock id="renderBlock1"  >
+        <apex:form id="secondform">
+          <div id="cent" align="center">
+              <apex:commandButton value="Delete" />
+            </div>
+        <apex:pageBlocksection id="pageb">
+            <strong><apex:pageblocktable value="{!SearchResults1}" var="o" rendered="{!NOT(ISNULL(SearchResults1))}" id="pt">
+                <apex:column id="ptc">
+                   <apex:facet name="header">
+                   <apex:inputCheckbox onclick="selectAllCheckboxes(this,'inputId')" id="checkall"/>
+                   </apex:facet>
+                   
+                   <apex:inputCheckbox onclick="uncheck(this)" id="inputIdss"/>
+                   <apex:commandLink onclick="window.open('https://manisai-dev-ed.my.salesforce.com/'+'{!o.Id}'+'/e?retURL=%2F'+'{!o.Id}'+'QAF')">Edit</apex:commandLink>
+                   <apex:commandLink onclick="window.open('https://manisai-dev-ed.my.salesforce.com/setup/own/deleteredirect.jsp?delID='+'{!o.Id}'+ '&amp;retURL=%2F001%2Fo&amp')">del</apex:commandLink>
+                </apex:column>              
+                 <apex:column headerValue="Account Name">
+                     <apex:commandLink onclick="window.open('https://manisai-dev-ed.my.salesforce.com/'+'{!o.Id}')">{!o.Name}</apex:commandLink>
+                </apex:column> 
+               
+                <apex:column value="{!o.Industry}"/>
+                <apex:column value="{!o.CreatedDate}"/>
+                </apex:pageblocktable></strong>  
+            
+        </apex:pageBlocksection>
+           <!-- <apex:outputLabel value=" {!start+1} of {!count}"/> -->
+               <apex:commandButton value="Previous" action="{!previous}" rerender="renderBlock1" disabled="{!start<5}" />
+            <apex:commandButton value="Next" action="{!next}" rerender="renderBlock1" disabled="{!if(start>count-noOfRecords,true,false)}" />
+       Display <apex:selectList size="1" value="{!noOfRecords}">
+            <apex:selectOption itemValue="5" itemLabel="5"/>
+            <apex:selectOption itemValue="10" itemLabel="10"/>
+            <apex:selectOption itemValue="15" itemLabel="15"/>
+            <apex:actionSupport event="onchange" action="{!search}"/> 
+        </apex:selectList>records per page.
+        </apex:form>
+
+    </apex:pageBlock> 
+    
+   
+    
+</apex:page>

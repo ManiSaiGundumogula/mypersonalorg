@@ -1,0 +1,66 @@
+<aura:component controller="RecordTypeC"
+                implements="lightning:actionOverride,force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickAction"
+                access="global" >
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute name="dependentOptions" type="List"/>
+    <aura:attribute name="parentOptions1" type="List"/>
+    <aura:attribute name="parentOptions2" type="List"/>
+	<aura:attribute name="fields"
+                    type="String[]" 
+                    default="['Origin', 'AccountId', 'Status', 'Case_Type__c', 'Tech_Case_type1__c', 'Tech_Case_type2__c', 'Issues__c', 'Specifics__c']"/>
+    <lightning:recordEditForm aura:id="recordEditForm"
+                           objectApiName="Case">
+        <lightning:messages />
+           <div class="slds-grid">
+                <div class="slds-col slds-p-horizontal_medium">
+                    <lightning:inputField fieldName="Origin"/>
+                    <lightning:inputField fieldName="AccountId"/>
+                    <lightning:inputField fieldName="Status"/>
+                   
+                    
+                </div>
+                <div class="slds-col slds-p-horizontal_medium">
+                   <!-- <lightning:inputField fieldName="Case_Type__c" />-->
+                    
+                    <lightning:select name="parentPicklistType" label="Type" aura:id="parentPicklistType" onchange="{!c.PickChangeType}">
+                        <option value="">None</option>
+                        <option value="Lal">Lal</option>
+                        <option value="Celsis">Celsis</option>
+                    </lightning:select>
+                    
+                    <lightning:select name="parentPicklist1" label="Tech Case Type 1" aura:id="parentPicklist1" onchange="{!c.PickChange1}">
+                        <option value="">None</option>
+                        <aura:iteration items="{!v.parentOptions1}" var="p">
+                            <option value="{!p.value}">{!p.text}</option>
+                        </aura:iteration>
+                    </lightning:select>
+                    
+                    <lightning:select name="parentPicklist2" label="Tech Case Type 2" aura:id="parentPicklist2" onchange="{!c.PickChange2}">
+                        <option value="">None</option>
+                        <aura:iteration items="{!v.parentOptions2}" var="q">
+                            <option value="{!q.value}">{!q.text}</option>
+                        </aura:iteration>
+                    </lightning:select>
+                    
+                    <lightning:select name="dependentPicklist" label="Issues">
+                        <option value="">None</option>
+                        <aura:iteration items="{!v.dependentOptions}" var="d">
+                            <option value="{!d.value}">{!d.text}</option>
+                        </aura:iteration>
+                    </lightning:select>
+                    <lightning:inputField fieldName="Issues__c"/>
+                    <lightning:inputField fieldName="Specifics__c"/>
+                  
+                  
+                    
+                </div>
+            </div>
+                
+          
+          
+           <br/> <br/>
+          <br/>
+      
+        <lightning:button class="slds-m-top_small" type="submit" label="Save" name="Save"/>
+    </lightning:recordEditForm>
+</aura:component>

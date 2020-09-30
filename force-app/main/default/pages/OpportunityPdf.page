@@ -1,0 +1,27 @@
+<apex:page standardController="Opportunity" extensions="opportunityproducts" renderAs="pdf">
+    <center><h2>INVOICE</h2></center>
+    <h3>Opportunity Products</h3>
+    
+    <apex:pageBlock >
+        <table border="1" cellSpacing="0" cellpadding="0" width="80%" >
+            <tr>
+                <th>Name</th>
+                
+                <th>Quantity</th>
+                <th>UnitPrice</th> 
+                <th>TotalPrice</th> 
+            </tr>
+            
+            <apex:repeat value="{!lineItems}" var="oli">
+                <tr>
+                    <td>{!oli.Name}</td>
+                    
+                    <td>{!oli.Quantity}</td>
+                    <td>{!oli.UnitPrice}</td> 
+					<td>{!oli.TotalPrice}</td> 
+                </tr>
+            </apex:repeat>   
+            
+        </table>
+    </apex:pageBlock>
+</apex:page>

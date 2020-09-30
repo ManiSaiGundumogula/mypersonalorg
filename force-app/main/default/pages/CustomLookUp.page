@@ -1,0 +1,64 @@
+<apex:page standardController="Opportunity" extensions="OpportunityOwnerEditExtension">
+    <script> 
+    var $ = jQuery.noConflict();
+    $(document).ready(function(){
+        $("#toggleId").click(function(){
+            $("#detailTblId").toggle();
+            if($("#detailTblId").css('display')=='none'){
+                $('#linkTextId').html('Click here to show the Contact information in the Tabular form.');
+            }else{
+                $('#linkTextId').html('Click here to Hide.');
+            }
+        });                                           
+    });  
+    function lookUpSelectedUser(userId, name){  
+        popUpLookUp.close();  
+        $( 'input[class$="opp_{!Opportunity.Id}"]' ).val(name);  
+        $( 'input[class$="userId_{!Opportunity.Id}"]' ).val(userId);  
+        $( 'input[class$="owner_{!Opportunity.Id}"]' ).val(name);  
+    } 
+    var popUpLookUp;  
+    function popupwindow(title, w, h) {  
+        var searchString = 'gund';  
+        var url = '/apex/OpportunityLookupWindow?searchString=' + searchString;
+        var left = (screen.width/2)-(w/2);  
+        var top = (screen.height/2)-(h/2);  
+        popUpLookUp = window.open(url, 'title', 'toolbar=no, location=no, directories=no, status=no, menubar=no,scrollbars=no, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+top+', left='+left);  
+        return popUpLookUp;  
+    }  
+    </script>
+    <apex:form >  
+        <apex:outputPanel id="pageMessages" layout="block">  
+            <apex:pageMessages escape="false" />  
+        </apex:outputPanel>  
+        <apex:pageBlock title="Edit Opportunity">  
+            <apex:pageBlockButtons >  
+                <apex:commandButton value="save changes" action="{!save}" rerender="pageMessages" />  
+                <apex:commandButton value="cancel" action="{!cancel}" rerender="pageMessages" />  
+            </apex:pageBlockButtons>  
+            <apex:outputPanel id="editContainer" layout="block">  
+                <apex:pageBlockSection title="Edit Opportunity" columns="2">  
+                    <apex:outputField value="{!opportunity.name}"/>  
+                    <apex:pageBlockSectionItem >  
+                        <apex:outputPanel layout="inline">  
+                            <apex:outputLabel value="{!$ObjectType.Opportunity.Fields.Opportunity_Owner__c.label}" 
+                                              for="lookupcontainer" />  
+                        </apex:outputPanel>  
+                        <apex:outputPanel layout="inline">  
+                            <div class="requiredInput" id="lookupcontainer" >  
+                                <div class="requiredBlock"></div>  
+                                <input class="opp_{!Opportunity.Id}" type="text" name="name" 
+                                       value="{!Opportunity.Opportunity_Owner__c}" />  
+                                <apex:image value="/s.gif" StyleClass="lookupIcon" style="cursor:pointer;" 
+                                            onclick="popupwindow('User', 600, 500)" />  
+                            </div>  
+                            <apex:inputText style="display:none" styleClass="userId_{!Opportunity.Id}" value="{!Opportunity.ownerId}" />  
+                            <apex:inputText style="display:none" styleClass="owner_{!Opportunity.Id}" 
+                                            value="{!Opportunity.Opportunity_Owner__c}" />  
+                        </apex:outputPanel>   
+                    </apex:pageBlockSectionItem>   
+                </apex:pageBlockSection>  
+            </apex:outputPanel>  
+        </apex:pageBlock>  
+    </apex:form>  
+</apex:page>

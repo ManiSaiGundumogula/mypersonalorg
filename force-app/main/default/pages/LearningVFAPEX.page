@@ -1,0 +1,31 @@
+<apex:page standardController="Opportunity" extensions="OpportunityProductsSelection">
+<apex:sectionHeader title="{!$ObjectType.Opportunity.Label}" subtitle="Opportunity Number: {!Opportunity.Name}"/>
+<apex:form id="FormId">
+
+<apex:pageblock >
+<apex:pageblockButtons location="both">
+        <apex:commandButton action="{!Save}" Value="Save"/>
+        <apex:commandButton action="{!Cancel}" Value="Cancel"/>
+    </apex:pageblockButtons>
+  
+    
+    <apex:pageblockSection title="Opportunity Information" collapsible="true" columns="3">
+        <apex:inputField value="{!Opportunity.Name}" style="color:blue;"/>
+        <apex:inputField value="{!Opportunity.CloseDate}"/>
+        <apex:inputField value="{!Opportunity.StageName}"/>
+    </apex:pageblockSection>
+  
+    <apex:pageblockSection title="Opportunity Products" collapsible="true" columns="1" >
+   
+   
+        <apex:inputField value="{!Opportunity.Select_All_Products__c}" onchange="ProdSelection();"/>      
+                               <!--<apex:actionFunction name="ProdSelection" action="{!ProductSelection}" reRender="FormId"/>-->
+        <apex:inputField value="{!Opportunity.Opportunity_Products_List__c}" style="color:red;"/>
+        <apex:outputField value="{!Opportunity.Expected_Close_Date__c}" style="color:red;"/>
+    </apex:pageblockSection>    
+    
+</apex:pageblock>
+<apex:actionFunction name="ProdSelection" action="{!ProductSelection}" reRender="FormId"/>
+</apex:form>
+
+</apex:page>

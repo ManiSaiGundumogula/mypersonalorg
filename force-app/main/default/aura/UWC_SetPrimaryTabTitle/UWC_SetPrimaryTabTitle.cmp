@@ -1,0 +1,19 @@
+<aura:component implements="flexipage:availableForAllPageTypes,lightning:backgroundUtilityItem" 
+                access="global" >
+    
+    <lightning:workspaceAPI aura:id="workspace" />
+   <!-- <aura:handler name="init" value="{!this}" action="{!c.doInit}" /> -->
+    
+    <ltng:require scripts="{!$Resource.sweetAlert1}" afterScriptsLoaded="{!c.afterScriptsLoaded}"/>
+   
+    <lightning:overlayLibrary aura:id="overlayLib"/>
+    <aura:attribute type="Boolean" name="restrict" default="true"/>
+   <!-- <aura:handler event="lightning:tabFocused" action="{!c.onTabFocused}" /> 
+    <aura:handler event="lightning:tabCreated" action="{!c.openTab}" />
+    <aura:handler event="lightning:tabRefreshed" action="{! c.onTabRefreshed }"/> 
+    <aura:handler event="lightning:tabClosed" action="{! c.onTabClosed }"/> -->
+    
+    <aura:handler event="lightning:tabFocused" action="{!c.openTab}" />
+    <aura:handler event="lightning:tabUpdated" action="{! c.onTabUpdaed }"/>
+   <!-- <aura:handler event="lightning:tabReplaced" action="{! c.onTabReplaced }"/> -->
+</aura:component>

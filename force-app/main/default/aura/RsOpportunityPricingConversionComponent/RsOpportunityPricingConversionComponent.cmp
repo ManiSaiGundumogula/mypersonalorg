@@ -1,0 +1,25 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" controller="RsOpportunityPricingConversionController"
+                access="global" >
+    <aura:attribute name="recordId" type="Id" />
+    <aura:attribute name="oppRec" type="opportunity" />
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    
+    <div class="slds-form-element slds-form-element_readonly">
+        <span class="slds-form-element__label">Name</span>
+        <div class="slds-form-element__control">
+            <div class="slds-form-element__static">{!v.oppRec.Name}</div>
+        </div>
+        
+    </div>
+    <div class="slds-form-element slds-form-element_readonly">
+        <span class="slds-form-element__label">Stage Name</span>
+        <div class="slds-form-element__control">
+            <div class="slds-form-element__static">{!v.oppRec.StageName}</div>
+        </div>
+        
+    </div>
+    <!--
+    Opportunity Id : {!v.recordId}
+    Opportunity Id : {!v.oppRec.Name}
+	-->
+</aura:component>

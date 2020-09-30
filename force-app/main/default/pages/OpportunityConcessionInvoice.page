@@ -1,0 +1,62 @@
+<!-- ------------------------------------------------------------
+Author:         Mani Sai Gundumogula
+Company:        Apps Associates
+Description:    
+
+History:
+<Date>          <Authors Name>               <Brief Description of Change>
+MARCH/04/2018     Mani Sai Gundumogula           Initail Creation
+
+------------------------------------------------------------>
+<apex:page standardController="Opportunity"  renderAs="pdf" extensions="OpportunityConcessionController">
+   
+    <apex:pageBlock >
+       <apex:outputText value="{0, date,  dd MMMM yyyy}">
+            <apex:param value="{!NOW()}" />
+        </apex:outputText>
+        <br/><br/>
+        {!opportunity.account.name} <br/>
+        {!opportunity.account.billingStreet}<br/>
+        {!opportunity.account.billingCity}<br/>
+        {!opportunity.account.billingState}<br/>
+        {!opportunity.account.billingCountry}<br/><br/>
+        Re:Additional Concession Approval -  {!opportunity.account.name}:{!opportunity.Country__c} <br/><br/>
+        Approval Letter #2143-432143 <br/><br/>
+        Dear {!opportunity.Owner.name}: <br/><br/>
+        This letter is to confirm the additonal concession for {!opportunity.account.name} for our dealer in {!opportunity.Country__c}.
+        <br/><br/>
+        
+        
+        <table border="1" cellSpacing="0" cellpadding="0" width="100%" >
+            <tr>
+                <th>Fleet</th>
+                
+                <th>Year</th>
+                <th>Model</th> 
+                <th>Min-Max</th> 
+                <th>Approved Concession</th> 
+                <th>Total Approved Concession</th> 
+                
+            </tr>
+            
+            <apex:repeat value="{!Opportunity.Concession__r}" var="oli">										
+                <tr>
+                    <td>{!oli.Fleet_Name__r.Name}</td>
+                    <td>{!(TEXT(YEAR(DATEVALUE(oli.CreatedDate))-1))} - {!TEXT(YEAR(DATEVALUE(oli.CreatedDate)))} </td>
+                    <td>{!oli.Base_Model__c} {!oli.Engine_Hp__c} {!oli.Name}</td> 
+                    <td>{!oli.Minimum__c}-{!oli.Maximum__c}</td>
+                    <td>{!oli.Approved_Concession__c}    </td> 
+                    <td>{!oli.Total_Approved_Concession__c}     </td> 
+                </tr>
+            </apex:repeat>   
+            
+        </table>
+        <br/><br/>
+        Good luck in securing this new business opportunity.<br/><br/>
+        Best Regards,<br/>
+        
+        Gundumogula Mani Sai<br/>
+        Regional Manager,<br/>
+        India.<br/>
+    </apex:pageBlock>
+</apex:page>
